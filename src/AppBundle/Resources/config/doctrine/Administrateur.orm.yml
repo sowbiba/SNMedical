@@ -1,0 +1,72 @@
+AppBundle\Entity\Administrateur:
+    type: entity
+    table: administrateur
+    indexes:
+        administrateur_hopital_id:
+            columns:
+                - hopital_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        nom:
+            type: string
+            nullable: false
+            length: 512
+            options:
+                fixed: false
+        prenom:
+            type: string
+            nullable: false
+            length: 512
+            options:
+                fixed: false
+        dateDeNaissance:
+            type: datetime
+            nullable: true
+            column: date_de_naissance
+        infosComplementaires:
+            type: text
+            nullable: true
+            length: 65535
+            options:
+                fixed: false
+            column: infos_complementaires
+        createdAt:
+            type: datetime
+            nullable: true
+            column: created_at
+        createdBy:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: created_by
+        updatedAt:
+            type: datetime
+            nullable: true
+            column: updated_at
+        updatedBy:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: updated_by
+    manyToOne:
+        hopital:
+            targetEntity: Hopital
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                hopital_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

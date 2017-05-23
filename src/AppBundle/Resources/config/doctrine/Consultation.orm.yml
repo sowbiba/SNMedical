@@ -1,0 +1,75 @@
+AppBundle\Entity\Consultation:
+    type: entity
+    table: consultation
+    indexes:
+        consultation_patient_id:
+            columns:
+                - patient_id
+        consultation_medecin_id:
+            columns:
+                - medecin_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        rapport:
+            type: text
+            nullable: true
+            length: 65535
+            options:
+                fixed: false
+        status:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                comment: '0 = Programmée / 1 = Terminée'
+                default: '0'
+        createdAt:
+            type: datetime
+            nullable: true
+            column: created_at
+        createdBy:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: created_by
+        updatedAt:
+            type: datetime
+            nullable: true
+            column: updated_at
+        updatedBy:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: updated_by
+    manyToOne:
+        medecin:
+            targetEntity: Medecin
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                medecin_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        patient:
+            targetEntity: Patient
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                patient_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

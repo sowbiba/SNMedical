@@ -1,0 +1,66 @@
+AppBundle\Entity\Medecin:
+    type: entity
+    table: medecin
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        nom:
+            type: string
+            nullable: false
+            length: 512
+            options:
+                fixed: false
+        prenom:
+            type: string
+            nullable: false
+            length: 512
+            options:
+                fixed: false
+        dateDeNaissance:
+            type: datetime
+            nullable: true
+            column: date_de_naissance
+        infosComplementaires:
+            type: text
+            nullable: true
+            length: 65535
+            options:
+                fixed: false
+            column: infos_complementaires
+        createdAt:
+            type: datetime
+            nullable: true
+            column: created_at
+        createdBy:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: created_by
+        updatedAt:
+            type: datetime
+            nullable: true
+            column: updated_at
+        updatedBy:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: updated_by
+    manyToMany:
+        hopital:
+            targetEntity: Hopital
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: medecin
+            inversedBy: null
+            joinTable: null
+            orderBy: null
+    lifecycleCallbacks: {  }

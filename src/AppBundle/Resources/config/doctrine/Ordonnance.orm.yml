@@ -1,0 +1,65 @@
+AppBundle\Entity\Ordonnance:
+    type: entity
+    table: ordonnance
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        infosComplementaires:
+            type: text
+            nullable: true
+            length: 65535
+            options:
+                fixed: false
+            column: infos_complementaires
+        consultationId:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: consultation_id
+        createdAt:
+            type: datetime
+            nullable: true
+            column: created_at
+        createdBy:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: created_by
+        updatedAt:
+            type: datetime
+            nullable: true
+            column: updated_at
+        updatedBy:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: updated_by
+    manyToMany:
+        medicament:
+            targetEntity: Medicament
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: ordonnance
+            joinTable:
+                name: ordonnance_has_medicament
+                joinColumns:
+                    -
+                        name: ordonnance_id
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    -
+                        name: medicament_id
+                        referencedColumnName: id
+            orderBy: null
+    lifecycleCallbacks: {  }
